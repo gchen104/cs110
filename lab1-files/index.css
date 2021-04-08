@@ -1,0 +1,63 @@
+/* Feel free to edit CSS of body if you'd like. We provide you the light gray background color and font family in the body styling */
+.header{
+  top: 0;left: 0;
+  z-index: 100;
+  display: flex; 
+  left: 50%;
+  position: relative;
+}
+.nav-item{
+  margin-left:35px;
+}
+.header .btn{
+  float: right;
+}
+#logo{
+
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    z-index: 100;
+}
+/*
+.header :hover{
+  text-decoration: underline;
+  color:rgb(106, 160, 226);
+}
+*/
+.content-wrapper{
+  max-width: 1190px;
+  margin: 56px auto;
+  justify-content: space-around;
+  display: flex;
+  padding-top: 30px;
+}
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0;
+  background-color: #e6ecf0;
+}
+
+.content-left {
+  width: 290px;
+}
+
+.content-left-text {
+  width: 100%;
+  height: 90px;
+  align-items: center;
+  background-color: black;
+}
+
+.content-left-cover {
+  height: 90px;
+  border-color: rgb(98, 12, 105);
+}
+
+.stats {
+  display: flex;
+}
+
+/* TODO: Create CSS for your Twitter Mockup */
