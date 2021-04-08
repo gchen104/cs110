@@ -6,20 +6,24 @@
   left: 50%;
   position: relative;
 }
+
+.header .btn{
+  position: absolute;
+  right: 20px;
+}
 .nav-item{
   margin-left:35px;
+  z-index: 100;
 }
-.header .btn{
-  float: right;
-}
+
 #logo{
 
     height: 30px;
-    width: 30px;
+    width: 40px;
     margin: 0 auto;
-    position: absolute;
+    position:fixed;
     left: 50%;
-    z-index: 100;
+    z-index: 5;
 }
 /*
 .header :hover{
