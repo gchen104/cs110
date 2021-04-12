@@ -36,6 +36,7 @@
 
 .content-wrapper{
   max-width: 1190px;
+  min-width: 1190px;
   margin: 56px auto;
   display: flex;
 }
@@ -98,13 +99,16 @@ body {
 /*  End of left box of the Mock Twitter page  */
 
 
-
-
 /* Middle box of the Mock Twitter page  */
 .content-middle {
   flex-grow: 1;
+  max-width: 610px;
   background-color: white;
   margin: 5px;
+}
+
+.content-middle-profile-pic {
+  border-radius: 50%; 
 }
 
 .content-middle-tweet {
@@ -127,6 +131,7 @@ body {
   min-width: 290px;
   max-height: 290px;
   max-width: 290px;
+
   background-color: white;
   margin: 5px;
 }
@@ -149,4 +154,22 @@ body {
   color: rgb(124, 192, 231);
   border-radius: 15px;
   border:thin solid rgb(130, 208, 228);
+}
+/* End of right box of the Mock Twitter page  */
+
+
+/* Skip links */
+.skip {
+  display: none;
+  position: absolute;
+  top: 50px;
+}
+/* End of skip links */
+
+
+/* Makes right box disappears when the width is less than 1000px */
+@media (max-width: 1050px) {
+  .content-right{
+    display: none;
+  }
 }
