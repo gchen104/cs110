@@ -6,27 +6,34 @@
   left: 50%;
   position: relative;
 }
+
+.header .btn{
+  position: absolute;
+  right: 20px;
+}
+
 .nav-item{
   margin-left:35px;
+  z-index: 100;
 }
-.header .btn{
-  float: right;
-}
-#logo{
 
+.header .navbar-nav a:hover{
+  border-bottom: 5px solid #4AB3F4;
+  color: #4AB3F4;
+}
+
+
+#logo{
     height: 30px;
-    width: 30px;
+    width: 40px;
     margin: 0 auto;
-    position: absolute;
+    position:fixed;
     left: 50%;
-    z-index: 100;
+    z-index: 5;
 }
-/*
-.header :hover{
-  text-decoration: underline;
-  color:rgb(106, 160, 226);
-}
-*/
+
+
+
 .content-wrapper{
   max-width: 1190px;
   margin: 56px auto;
@@ -143,4 +150,3 @@ body {
   border-radius: 15px;
   border:thin solid rgb(130, 208, 228);
 }
-/* End of right box of the Mock Twitter page  */
