@@ -16,6 +16,9 @@
   margin-left:35px;
   z-index: 100;
 }
+.header .navbar-nav a{
+  color: black;
+}
 
 .header .navbar-nav a:hover{
   border-bottom: 5px solid #4AB3F4;
