@@ -35,6 +35,10 @@
     z-index: 5;
 }
 
+#pause{
+  position:fixed;
+}
+
 
 
 .content-wrapper{
