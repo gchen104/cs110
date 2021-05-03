@@ -1,0 +1,64 @@
+.content-wrapper{
+  justify-content: center;
+}
+
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0 auto;
+  background-color: #e6ecf0;
+}
+
+img {
+  height: 60px;
+  border-radius: 50%;
+}
+
+/* Button CSS */
+button, input {
+  margin-left: 20px;
+}
+
+b + div + div {
+  margin-left: 5px;
+}
+
+.buttons {
+  display: flex;
+  width: 700px;
+  height: 30px;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 10px;
+}
+/* End of Button CSS */
+
+
+/* Tweet CSS */
+.tweet-container {
+  margin: 0 auto;
+  width: 700px;
+  height: 200px;
+}
+.tweet {
+  display: flex;
+  width: 100%;
+  min-height: 30px;
+  background-color: rgb(255, 255, 255);
+  margin: 5px auto;
+  padding: 6px;
+}
+.tweetContent {
+  padding: 5px;
+}
+.tweetText {
+  padding-bottom: 5px;
+}
+.authorInfo {
+  display: flex;
+  padding-top: 5px;
+}
+.profilePic {
+  position: relative;
+  padding-right: 5px;
+}
+/* End of Tweet CSS */

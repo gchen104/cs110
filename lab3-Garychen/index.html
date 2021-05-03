@@ -1,0 +1,46 @@
+<!-- 
+  By Gary Chen and Christopher Gentibano 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+
+  <body>
+    <div class = "content-wrapper">
+
+      <!-- Begin Search/Button  -->
+      <divs class = "buttons">
+        <input id="searchBar" type="search" placeholder="Search in tweets"> 
+        <button id="startStream">Give me tweets!</button>
+        <button id="stopStream">Stop giving me tweets!</button>
+      </divs>
+      <!-- End Search/Button  -->
+      
+      <!-- Begin Tweets -->
+      <div class = "tweet-container"> </div>
+
+      <!-- This is a template for the tweet. It won't show on the page -->
+      <template id="tweetTemplate">
+        <div class = "tweet">
+          <img src="ratatouille.jpg" class = "profilePic">
+          <div class = "tweetContent">
+            <div class = "authorInfo">
+              <b class = "author">Remmy ratty </b>
+              <div class = "handle">@remmyratty</div>
+              <div class = "date"></div>
+            </div>
+            <div class = "tweetText">
+              Hello!! I am gary
+            </div>
+          </div>
+        </div>
+      </template>
+      <!-- End Tweets -->
+
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
