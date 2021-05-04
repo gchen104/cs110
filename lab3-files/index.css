@@ -7,9 +7,14 @@
   position: relative;
 }
 
-.header .btn{
+.header .btn-primary{
   position: absolute;
-  right: 20px;
+  right: 10px;
+}
+
+.header .form-inline{
+  position: absolute;
+  right:20%;
 }
 
 .nav-item{
@@ -36,10 +41,9 @@
 }
 
 #pause{
-  position:fixed;
+  position: absolute;
+  right:60%;
 }
-
-
 
 .content-wrapper{
   max-width: 1190px;
@@ -78,7 +82,7 @@ body {
   color: white;
   z-index: 5;
 }
-
+/
 .content-left-profile-pic {
   position: absolute;
   border:thin solid white;
@@ -108,27 +112,9 @@ body {
 
 /* Middle box of the Mock Twitter page  */
 .content-middle {
-  flex-grow: 1;
-  max-width: 610px;
-  background-color: white;
-  margin: 5px;
+  margin: 1px;
 }
 
-.content-middle-profile-pic {
-  border-radius: 50%; 
-}
-
-.content-middle-tweet {
-  display: flex;
-  padding: 10px;
-  border: 1px solid rgb(243, 238, 241);
-}
-
-.content-middle-tweet-text {
-  position: relative;
-  left: 12px;
-  top: 6px;
-}
 /* End of middle box of the Mock Twitter page  */
 
 
@@ -138,7 +124,7 @@ body {
   min-width: 290px;
   max-height: 290px;
   max-width: 290px;
-
+  
   background-color: white;
   margin: 5px;
 }
@@ -164,7 +150,37 @@ body {
 }
 /* End of right box of the Mock Twitter page  */
 
-
+/* Added for populating tweets */
+.tweet-container {
+  margin: 0 auto;
+  width: 600px;
+  height: 200px;
+}
+.tweet {
+  display: flex;
+  width: 100%;
+  min-height: 30px;
+  background-color: rgb(255, 255, 255);
+  margin: 5px auto;
+  padding: 6px;
+}
+.tweetContent {
+  padding: 5px;
+}
+.tweetText {
+  padding-bottom: 5px;
+}
+.authorInfo {
+  display: flex;
+  padding-top: 5px;
+}
+.profilePic {
+  position: relative;
+  margin-top: 15px;
+  padding-right: 5px;
+  border-radius: 50%; 
+  height: 50px;
+}
 /* Skip links */
 .skip {
   display: none;
