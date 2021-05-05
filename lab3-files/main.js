@@ -1,15 +1,11 @@
-
-var searchString = "";
+let searchString = "";
 var master_list = [];
 var id_list = new Set();
 
-function handleSearch(event) {
+function matchText(){
     //This tweets holds all 10 tweets
     let tweets = document.querySelector(".tweet-container").children
-
-    //searchString holds the text that the user types inside the search bar 
-    let searchString = event.target.value.trim().toLowerCase()
-
+    console.log( "There is something " + searchString )
     //Check if the user has typed anything and if they fetched any tweets yet
     if( searchString === "" && tweets.length > 0 ){
         for( let tweet of tweets ){
@@ -35,6 +31,11 @@ function handleSearch(event) {
     }
 }
 
+function handleSearch(event) {
+    //searchString holds the text that the user types inside the search bar 
+    searchString = event.target.value.trim().toLowerCase()
+    matchText()
+}
 
 function refreshTweets(list_dic, id_list2) {
     //Grabbing the tweet container
@@ -54,6 +55,7 @@ function refreshTweets(list_dic, id_list2) {
         let clone = document.getElementById('tweetTemplate').content.cloneNode(true)
 
         //Begins extracting neccesary information from JSON
+        clone.querySelector('.tweet').style.display = "none";
         clone.querySelector('.profilePic').setAttribute('src', list_dic[i].img_url) //set profile pic
         clone.querySelector('.author').innerHTML = list_dic[i].user_name //set author name
         clone.querySelector('.handle').innerHTML = "@" + list_dic[i].screen_name //set handle
@@ -66,6 +68,7 @@ function refreshTweets(list_dic, id_list2) {
         //Then add them into HTML file
         parent.appendChild( child.cloneNode(true) )
     })
+    matchText()
 }
 
 function fetch_request(){
