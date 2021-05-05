@@ -1,7 +1,7 @@
 
 var searchString = "";
 var master_list = [];
-var id_list = [];
+var id_list = new Set();
 
 function handleSearch(event) {
     //This tweets holds all 10 tweets
@@ -80,9 +80,8 @@ function fetch_request(){
         // do something with data
         for (let i = 0; i < data.statuses.length; i++)
         {
-            if (!id_list.includes(data.statuses[i].id))
+            if (id_list.add(data.statuses[i].id))
             {
-                id_list.push(data.statuses[i].id)
                 master_list.push(
                 {
                     "id" : data.statuses[i].id,
@@ -92,8 +91,6 @@ function fetch_request(){
                     "date": new Date (data.statuses[i].created_at),
                     "text": data.statuses[i].text
                 })
-                //console.log(data.statuses[i].user.screen_name)
-                //console.log(master_list[data.statuses[i].id])
             }
         }
         //Sorting tweet objects by time
