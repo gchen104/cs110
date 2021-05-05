@@ -9,6 +9,12 @@ const url = "http://ec2-54-219-224-129.us-west-1.compute.amazonaws.com:2000/feed
 //This is the timer that will keep fetching new tweets
 let timer
 
+//This tweetIDs set will hold unique ID of each tweet so there won't be duplicate tweets
+let tweetIDs = new Set()
+
+//This arrayOfTweets holds neccesary JSON data that will be used to populate tweets in the HTML file
+let arrayOfTweets = []
+
 //Show tweet button function
 function showTweets() {
     //Fetch tweet in JSON form
@@ -25,48 +31,46 @@ function stopTweets(){
 
 //This function fetch tweet in JSON form
 function fetchTweets(){
+    //In order to keep growing tweets in order, the current displayed tweets will be cleared.
+    //Then, new tweets will be fetched, appended to old tweets, checked for duplicate, sorted again by date, and finally
+    //added into the HTML.
     let parent = document.querySelector('.tweet-container')
+    while( parent.firstChild ){
+        parent.removeChild(parent.firstChild)
+    }
+
     fetch(url)
         .then( response => response.json())
         .then( data => {
-            //This tweetIDs set will hold unique ID of each tweet so there won't be duplicate tweets
-            let tweetIDs = new Set()
-
-            //Tis arrayOfTweets holds neccesary JSON data that will be used to populate tweets in the HTML file
-            let arrayOfTweets = []
-
-            //This while loop clears previous tweets in preparation for new tweets
-            while( parent.firstChild ){
-                parent.removeChild(parent.firstChild)
-            }
-
             // This populate the entire content of the tweets (profile picture, handle, name, texts etc etc)
-            for( let i = 0; i < 10; i++ ){
+            for( let i = 0; i < data.statuses.length; i++ ){
                 //Grab the tweet template
                 let clone = document.getElementById('tweetTemplate').content.cloneNode(true)
 
-                //Begins extracting neccesary information from JSON
+                //Begins extracting neccesary information from JSON and populating tweet content
                 clone.querySelector('.profilePic').setAttribute('src', data.statuses[i].user.profile_image_url_https) //set profile pic
                 clone.querySelector('.author').innerHTML = data.statuses[i].user.name //set author name
                 clone.querySelector('.handle').innerHTML = "@" + data.statuses[i].user.screen_name //set handle
                 clone.querySelector('.tweetText').innerHTML = data.statuses[i].text //set text
-                clone.querySelector('.date').innerHTML = new Date(data.statuses[i].created_at).toDateString()
+                clone.querySelector('.date').innerHTML = new Date(data.statuses[i].created_at).toDateString() + " " + new Date(data.statuses[i].created_at).toLocaleTimeString()
 
-                //Check for duplicate tweet ID. Then, push them into arrayOfTweeets
+                //Check for duplicate tweet ID in the set. Then, push them into arrayOfTweeets if it's not a duplicate
                 if( tweetIDs.add(data.statuses[i].id) ){
-                    arrayOfTweets[i] = {obj: clone, date: new Date(data.statuses[i].created_at)}
+                    arrayOfTweets.push({obj: clone, 
+                                        date: new Date(data.statuses[i].created_at)})
                 }
+                
             }//End for loop
 
             //Sort all tweets by date
             arrayOfTweets.sort(function(a, b){
                 return a.date.getTime() - b.date.getTime()
-            }).forEach(child => {
-                //Then add them into HTML file
-                parent.appendChild(child.obj)
+            }).forEach( child => {
+            //Then add them into HTML file
+                parent.appendChild( child.obj.cloneNode(true) )
             })
         })
-        .catch( error => console.log("Fetched some errors for ya: "+ error))
+        .catch( error => console.log("Oh no! Here's some error(s): "+ error))
 }
 
 //Function for the search bar
