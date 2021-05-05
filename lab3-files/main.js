@@ -5,11 +5,10 @@ var id_list = new Set();
 function matchText(){
     //This tweets holds all 10 tweets
     let tweets = document.querySelector(".tweet-container").children
-    console.log( "There is something " + searchString )
     //Check if the user has typed anything and if they fetched any tweets yet
     if( searchString === "" && tweets.length > 0 ){
         for( let tweet of tweets ){
-            //If no text inside search bar, show all 10 tweets
+            //If no text inside search bar, show all tweets
             tweet.style.display = "flex"
         }
 
@@ -37,7 +36,7 @@ function handleSearch(event) {
     matchText()
 }
 
-function refreshTweets(list_dic, id_list2) {
+function refreshTweets(list_dic) {
     //Grabbing the tweet container
     let parent = document.querySelector('.tweet-container')
 
@@ -49,7 +48,7 @@ function refreshTweets(list_dic, id_list2) {
         parent.removeChild(parent.firstChild)
     }
 
-    console.log("populating tweets")
+    //populating tweets
     for( let i = 0; i < list_dic.length; i++ ){
         //Grab the tweet template
         let clone = document.getElementById('tweetTemplate').content.cloneNode(true)
@@ -68,6 +67,7 @@ function refreshTweets(list_dic, id_list2) {
         //Then add them into HTML file
         parent.appendChild( child.cloneNode(true) )
     })
+    //Each time we fetch new tweets, we check if there is something in the search bar to match
     matchText()
 }
 
@@ -100,10 +100,8 @@ function fetch_request(){
         master_list.sort((a, b) => {
             return b.date.getTime() - a.date.getTime()
         })
-        let unique_id = [...new Set(id_list)]; // removes duplicates
-
         //Appending new tweets
-        refreshTweets(master_list, unique_id)
+        refreshTweets(master_list)
         })
         .catch(err => {
             // error catching
