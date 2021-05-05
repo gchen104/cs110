@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" integrity="sha256-qM7QTJSlvtPSxVRjVWNM2OfTAz/3k5ovHOKmKXuYMO4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" crossorigin="anonymous"></script>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+  </head>
+  <body style="background-color: rgb(243, 237, 250);">
+    <div class="header">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-custom bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContents" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContents">
+            <div class="navbar-nav" role="navigation">
+                <a class="nav-item nav-link active" href="#">Home</a>
+                <a class="nav-item nav-link" href="#">Moments</a>
+                <a class="nav-item nav-link" href="#">Notifications</a>
+                <a class="nav-item nav-link" href="#">Messages</a>
+            </div>
+        </div>
+        <input type="checkbox" id="pause" name="pause">
+        <img id="logo" src="./images/twitter-logo.png" alt="twitter logo">
+        <button class="btn float-right btn-primary btn-sm" class="rounded-pill" type="primary">Tweet</button>
+        <form class="form-inline my-2 my-lg-0">
+          <input id="searchBar" type="search" placeholder="Search in tweets">
+        </form>
+    </nav>
+    </div>
+
+    <a href="#tweets" class="skip">Jump to tweets</a>
+
+    <!-- The 3 boxes start below-->
+    <div class = "content-wrapper" href="tweets">
+
+      <div class="content-left">
+        <div class="content-left-text">
+          <div style="font-size:2.2em; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">RATATOUILLE</div>
+        </div>
+        <div class="content-left-middle">
+          <img src="images/ratatouille.jpg" width="95" height="95" alt="profile picture of Remy" class="content-left-profile-pic">
+          <div>
+            <b><u>Remy</u></b>
+            <p>@remy</p>
+          </div>
+        </div>
+        <div class="content-left-bottom">
+          <div class="content-left-font">
+            Tweets 
+            <p style="color:rgb(81, 143, 201)">5049</p>
+          </div>
+          <div class="content-left-font">
+            Following 
+            <p style="color:rgb(81, 143, 201)">324</p>
+          </div>
+          <div class="content-left-font">
+            Followers 
+            <p style="color:rgb(81, 143, 201)">809</p>
+          </div>
+        </div>
+      </div>
+
+      <div class = "content-middle" role="main">
+        <div class = "tweet-container"> </div>
+
+        <!-- This is a template for the tweet. It won't show on the page -->
+        <template id="tweetTemplate">
+          <div class = "tweet">
+            <img src="ratatouille.jpg" class = "profilePic">
+            <div class = "tweetContent">
+              <div class = "authorInfo">
+                <b class = "author">Remmy ratty </b>
+                <div class = "handle">@remmyratty</div>
+                <div class = "date"></div>
+              </div>
+              <div class = "tweetText">
+                Hello!! I am gary
+              </div>
+            </div>
+          </div>
+        </template>
+      <!-- End Tweets -->
+      </div>
+  
+      <div class = "content-right">
+        <div class="content-right-text"><b>Who to follow</b></div>
+
+        <div class="content-right-person">
+          <img src="images/linguini.png" width="65" height="65" alt="profile picture of Remy" class="content-middle-profile-pic">
+          <div >
+            <b class="content-right-text">Linguini </b> @linguini
+            <div class="content-follow">
+              Follow
+            </div>
+          </div>
+        </div>
+        <div class="content-right-person">
+          <img src="images/ratatouille.jpg" width="65" height="65" alt="profile picture of Remy" class="content-middle-profile-pic">
+          <div>
+            <b class="content-right-text">CS 110 TA </b> @cs
+            <div class="content-follow">
+              Follow
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <footer>
+    <script src="main.js"></script>
+  </footer>
+</html>
