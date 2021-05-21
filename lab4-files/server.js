@@ -36,6 +36,11 @@ app.get('/', homeHandler.getHome);
 app.post('/roomName', (req, res) =>{
     res.redirect(req.body.room);
 })
+app.get("/getroom", (req, res) => {
+  const newRoom = new Room({
+    name: req.body.roomName
+  })
+})
 
 app.get('/:roomName', roomHandler.getRoom);
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));

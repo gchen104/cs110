@@ -31,18 +31,11 @@
   </div>
 </div>
 </div>
-<p>The existing chatrooms are: </p>
+<p>Chatrooms: </p>
+{{#if isAvailable}}
 <ul class="list-group">
-  <li class="list-group-item">{{room}}</li>
-  <li class="list-group-item">This is suppose to be a chat room</li>
+  {{#each rooms}}
+  <li> <a href= {{this.name}}> {{this.name}}</a></li>
+  {{/each}}
 </ul>
-
-<script type="text/x-handlears-template" id="options">
-    {{#each option}}
-        {{#if selected}}
-            <option value="{{id}}" selected="selected">{{name}}</option>
-        {{else}}
-            <option value="{{id}}">{{name}}</option>
-        {{/if}}
-    {{/each}}
-</script>
+{{/if}}
