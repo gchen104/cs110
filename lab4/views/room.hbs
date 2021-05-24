@@ -1,0 +1,55 @@
+
+<h1> Welcome to Chat Room {{ name }}! </h1>
+
+<div id="messages"> 
+    {{#each messages}}
+        <div id="messageContainer">
+            <div id="username">{{userName}}</div>
+            <div id="messageDate">&nbsp;{{date}}</div>
+        </div>
+        <div id="message"> 
+            &ensp;
+            {{message}} 
+        </div>
+    {{/each}}
+</div>
+
+<div class="inputBox">
+    {{#if username_set }}
+        <form method="post" action="/message">
+            <input id="userInput" name="message" type="search" placeholder="Type something...">
+            <button id="send" type="submit" >Send</button>
+        </form>
+    {{else}}
+        <form method="post" action="/usernameSet">
+            <input id="nickname" name="username" placeholder="Type a nickname...">
+            <button type="submit" >Set nickname</button>
+        </form>
+    {{/if}}
+</div>
+
+{{!-- <script src="/socket.io/socket.io.js"></script> --}}
+<script>
+    //const socket = io()
+    document.querySelector('.send').addEventListener("click", sendMessage)
+    document.querySelector('.usertInput').addEventListener("input", grabMessage)
+
+    var newMessage = ""
+
+    function grabMessage( text ){
+        console.log("saving  input")
+        newMessage = text.target.value
+    }
+
+    function sendMessage( item ) {
+        console.log("clicked!!!!!")
+
+        //socket.emit('sendMessage', {
+        //    message: newMessage
+        //})
+    }
+
+    socket.on('sendMessage', data => {
+        console.log("New message received!")
+    })
+</script>
