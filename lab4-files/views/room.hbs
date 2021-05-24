@@ -1,31 +1,88 @@
-<h1> Chat Room </h1>
-<p>This is a demo of chatroom page</p>
+
 <p>
     The room you are visiting is {{ roomName }}
 </p>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Create Nickname
-</button>
+<form action="/createMessage" id="msgform" method="POST" >
+<h1 name= "roomName"> {{ roomName }} </h1>
+    <input type="hidden" name="room_name" value={{ roomName }} />
+    Username: 
+    <input type="text" name="username" > 
+    Message: 
+    <input type="text" name="message" onsubmit="submitMsg()"> 
+    <!-- <button type="button" value="Submit" id="submitButton" onclick="submitMsg();">Submit message</button> -->
+    <input type="submit" value="Submit your message" onclick="submitMsg()"/> 
+</form>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create Room</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Create</button>
-        
-      </div>
-    </div>
-  </div>
+
+<!--
+    
+  -->
+
+
+<p>Messages: </p>
+<div class = "msg-container"> 
+  <template id="msg_template">
+    <ul>
+      <li>
+        <p class = "un_txt">Username </p>
+        <p class = "msg_txt">
+          example txt
+        </p>
+      </li>
+    </ul>
+  </template>
 </div>
-<p>To generate a new room, here is the room id: {{ newRoomId }}</p>
+
+<script>
+
+  let parent = document.querySelector('.msg-container')
+  var db_list_check = false;
+  var db_current_size = 0;
+  
+
+  function startShowingMessage(){
+      intervalID = setInterval(async function(){
+
+      const response = await fetch('http://localhost:8080/getMessages')
+      .then(res => res.json())
+      .then(data => {  
+        console.log(data)
+          let clone = document.getElementById('msg_template').content.cloneNode(true)
+          //console.log(data);
+          console.log("the data len: " + data.length)
+          console.log(db_current_size)
+          if (db_list_check == false){
+            for (var i = 0; i< data.length; i++)
+            {
+              let clone = document.getElementById('msg_template').content.cloneNode(true);
+              clone.querySelector('.msg_txt').innerHTML = data[i].message;
+              clone.querySelector('.un_txt').innerHTML = data[i].user;
+              parent.appendChild(clone);
+              console.log(data[i].message)
+              db_list_check = true;
+              db_current_size = data.length;
+            }
+          }
+          else if (db_current_size > data.length)
+          {
+            console.log("inside elif")
+            let clone = document.getElementById('msg_template').content.cloneNode(true);
+            clone.querySelector('.msg_txt').innerHTML = data[data.length-1].message;
+            clone.querySelector('.un_txt').innerHTML = data[data.length-1].user;
+            parent.appendChild(clone);
+            db_current_size = data.length;
+          }
+      })}, 2000);     
+  }
+
+  function submitMsg()
+  {
+    // grab the text, and create the msg
+    console.log("submitting")
+    db_current_size += 2
+    console.log(db_current_size)
+    startShowingMessage()
+  }
+  startShowingMessage()
+</script>

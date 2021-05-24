@@ -18,9 +18,10 @@
         </button>
       </div>
       <div class="modal-body">
-            <form action="http://localhost:8080/roomName" method="POST">
+            <form action="/roomName" method="POST">
             Room Name: 
             <input type="text" name="room"><br>
+            </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -35,7 +36,7 @@
 {{#if isAvailable}}
 <ul class="list-group">
   {{#each rooms}}
-  <li> <a href= {{this.name}}> {{this.name}}</a></li>
+  <li> <a href= {{this.room_name}}> {{this.room_name}}</a></li>
   {{/each}}
 </ul>
 {{/if}}

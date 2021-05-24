@@ -4,6 +4,9 @@ const ChatRooms = new Schema({
   room_name: {
     type: String,
     required: true
+  },
+  message:{
+    type: String
   }
 });
 
