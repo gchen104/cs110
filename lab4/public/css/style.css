@@ -1,24 +1,37 @@
-#messages {
-    min-width: 400px;
-    min-height: 400px;
+#chatroom {
+    list-style: disc;
+    padding: 5px;
 }
 
-#messageContainer {
+#roomPage {
+    align-items: center;
+}
+
+.messages {
+    min-width: 400px;
+    min-height: 400px;
+    max-height: 400px;
+    overflow:auto;
+    border-style: solid;
+    padding: 5px;
+}
+
+.messageContainer {
     display: flex;
     min-width: 100%;
     min-height: 20px;
     max-height: 80px;
 }
 
-#message{
+.message{
     color: black;
 }
 
-#username{
+.username{
     color: red;
 }
 
-#messageDate{
+.messageDate{
     padding-top: 4px;
     font-size: 70%;
     text-align: center;

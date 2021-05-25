@@ -1,55 +1,76 @@
+<div id="roomPage">
+    <h1> Welcome to Chat Room {{ name }}! </h1>
 
-<h1> Welcome to Chat Room {{ name }}! </h1>
+    {{!-- This div contains all messages for the current chatroom --}}
+    <div class="messages"> 
+        {{!-- Using handlebars syntax to display all messages --}}
+        {{#each messages}}
+            <div class="messageContainer">
+                <div class="username">{{userName}}</div>
+                <div class="messageDate">&nbsp;{{date}}</div>
+            </div>
+            <div class="message"> 
+                &ensp;
+                {{message}} 
+            </div>
+        {{/each}}
+    </div>
 
-<div id="messages"> 
-    {{#each messages}}
-        <div id="messageContainer">
-            <div id="username">{{userName}}</div>
-            <div id="messageDate">&nbsp;{{date}}</div>
-        </div>
-        <div id="message"> 
-            &ensp;
-            {{message}} 
-        </div>
-    {{/each}}
-</div>
-
-<div class="inputBox">
-    {{#if username_set }}
-        <form method="post" action="/message">
-            <input id="userInput" name="message" type="search" placeholder="Type something...">
+    {{!-- This div contains an input box and a send button --}}
+    <div class="inputBox">
+        {{!-- The user must enter a username BEFORE they can start chatting --}}
+        {{#if username_set }}
+            <input id="userInput" name="message" placeholder="Type something...">
             <button id="send" type="submit" >Send</button>
-        </form>
-    {{else}}
-        <form method="post" action="/usernameSet">
-            <input id="nickname" name="username" placeholder="Type a nickname...">
-            <button type="submit" >Set nickname</button>
-        </form>
-    {{/if}}
+        {{else}}
+            <form method="post" action="/usernameSet">
+                <input id="nickname" name="username" placeholder="Type a nickname...">
+                <button type="submit" >Set nickname</button>
+            </form>
+        {{/if}}
+    </div>
 </div>
 
-{{!-- <script src="/socket.io/socket.io.js"></script> --}}
-<script>
-    //const socket = io()
-    document.querySelector('.send').addEventListener("click", sendMessage)
-    document.querySelector('.usertInput').addEventListener("input", grabMessage)
 
+
+{{!-- Socket.io --}}
+<script src="https://cdn.socket.io/3.0.0/socket.io.js"></script>
+<script>
+    document.querySelector('#send').addEventListener("click", sendMessage)      //Grab the send button
+    document.querySelector('#userInput').addEventListener("input", grabMessage) //Grab the input box
+
+    //Grabbing the info from the cookies
+    var cookies = document.cookie.split(';')
+    var username = cookies[0].split('=')[1]
+    var roomName = cookies[1].split('=')[1]
+
+    //This is where input box's value will be stored in
     var newMessage = ""
 
+    //Callback function for input box
     function grabMessage( text ){
-        console.log("saving  input")
         newMessage = text.target.value
     }
 
+    //Callback function for send button
     function sendMessage( item ) {
-        console.log("clicked!!!!!")
-
-        //socket.emit('sendMessage', {
-        //    message: newMessage
-        //})
+        //Each time the user press send, socket will emit an event and pass
+        //user's message, along with info that is inside the cookies
+        socket.emit('newMessage', {
+            message: newMessage,
+            roomName: roomName,
+            username: username
+        })
     }
 
-    socket.on('sendMessage', data => {
-        console.log("New message received!")
+    //Socket listening
+    //Each time socket detects "newMessage" event from the server, it will refresh the page.
+    const socket = io('http://localhost:8080')
+    socket.on('newMessage', data => {
+        console.log(`New message received for chatroom ${roomName}. Refreshing page...`)
+        location.reload()
     })
+
+    //This line automatically scrolls to the bottom of the message box each time this page is loaded.
+    document.querySelector('.messages').scrollTop = document.querySelector('.messages').scrollHeight
 </script>
