@@ -36,28 +36,31 @@
 {{!-- Socket.io --}}
 <script src="https://cdn.socket.io/3.0.0/socket.io.js"></script>
 <script>
-    document.querySelector('#send').addEventListener("click", sendMessage)      //Grab the send button
     document.querySelector('#userInput').addEventListener("input", grabMessage) //Grab the input box
+    document.querySelector('#send').addEventListener("click", sendMessage)      //Grab the send button
 
     //Grabbing the info from the cookies
-    var cookies = document.cookie.split(';')
-    var username = cookies[0].split('=')[1]
-    var roomName = cookies[1].split('=')[1]
+    var cookies  = document.cookie.split(';')
+    var roomName = cookies[0].split('=')[1]
+    var username = cookies[1].split('=')[1]
 
     //This is where input box's value will be stored in
     var newMessage = ""
 
     //Callback function for input box
     function grabMessage( text ){
+        
         newMessage = text.target.value
+        console.log(newMessage)
     }
 
     //Callback function for send button
     function sendMessage( item ) {
         //Each time the user press send, socket will emit an event and pass
         //user's message, along with info that is inside the cookies
+        console.log(`msg: ${newMessage}, roomName: ${roomName}, username: ${username}`)
         socket.emit('newMessage', {
-            message: newMessage,
+            message:  newMessage,
             roomName: roomName,
             username: username
         })
